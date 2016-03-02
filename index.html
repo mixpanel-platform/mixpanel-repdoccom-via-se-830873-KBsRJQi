@@ -32,7 +32,7 @@
       var percent = function(numerator, denominator){
         var value = 0
         if (denominator != 0){
-          value = Math.floor( numerator / denominator * 10000)
+          value = Math.floor( numerator / denominator * 100)
           value = value.toFixed(2)
         }
         return value + "%"
