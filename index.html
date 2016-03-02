@@ -23,7 +23,8 @@
       <div id="graph"></div>
     </div>
     <div id="table-container" >
-      <table id="table" class="display" width="100%"></table>
+      <table id="tableTotal%" class="display" width="100%"></table>
+      <table id="tableTime" class="display" width="100%"></table>
     </div>
     <script>
       var percent = function(numerator, denominator){
@@ -33,15 +34,17 @@
         }
         return value
       }
+
+      var total = function(data){
+        debugger
+      }
       
       var eventSelect = $('#eventSelect').MPEventSelect();
       var propSelect  = $('#propSelect').MPPropertySelect();
       var dateSelect  = $('#dateSelect').MPDatepicker();
       var eventGraph  = $('#graph').MPChart({chartType: 'line'});
-      var eventTable  = $('#table').MPTable({
-        showPercentages: true,
-        firstColHeader: 'Event'
-      });
+      var totalTable = $('#tableTotal').MPTable();
+      var eventTable  = $('#tableTime').MPTable();
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
@@ -53,7 +56,7 @@
         // fix x scroll on the table
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
-            debugger
+            total(results)
             eventGraph.MPChart('setData', results);
             eventTable.MPTable('setData', results);
           });
