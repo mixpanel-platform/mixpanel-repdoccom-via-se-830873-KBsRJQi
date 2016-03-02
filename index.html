@@ -42,7 +42,6 @@
       
       var drawTable = function(data){
         var rows = []
-        debugger
         _.each(data, function(v,k){
             rows.push({
               'Key': k,
@@ -51,18 +50,18 @@
             })
         })  
         
-        var table = $('#tableTotal').DataTable();
+        var table = $('#tableTotal').DataTable({
+          scrollX: true,
+          columns: [
+            { title: "Key", data: "Key"},
+            { title: "Percent", data: "Percent"},
+            { title: "Total", data: "Total"},
+          ]
+        })
+        
         table.rows.add(rows).columns.adjust().draw();
       }
-      
-      $('#tableTotal').DataTable({
-        scrollX: true,
-        columns: [
-          { title: "Key", data: "Key"},
-          { title: "Percent", data: "Percent"},
-          { title: "Total", data: "Total"},
-        ]
-      })
+
 
       var total = function(data){
         var sum = 0
