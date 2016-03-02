@@ -53,6 +53,9 @@
       
       $('#tableTotal').DataTable({
         scrollX: true,
+        scrollY: "200px",
+        scrollCollapse: true,
+        paging: false,
         columns: [
           { title: "Key", data: "Key"},
           { title: "Percent", data: "Percent"},
