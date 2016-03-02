@@ -8,7 +8,6 @@
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <style>
     #table-container {
-      width: 100%;
       overflow-x: auto;
       height: 30em;
       overflow-y: auto;
@@ -64,9 +63,9 @@
       var dateSelect  = $('#dateSelect').MPDatepicker();
       var eventGraph  = $('#graph').MPChart({chartType: 'line'});
       var totalTable = $('#tableTotal').MPTable();
-      var eventTable  = $('#tableTime').MPTable({
-        showPercentages : true
-      });
+      // var eventTable  = $('#tableTime').MPTable({
+      //   showPercentages : true
+      // });
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
@@ -75,7 +74,7 @@
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             eventGraph.MPChart('setData', results);
-            eventTable.MPTable('setData', results);
+            // eventTable.MPTable('setData', results);
             totalTable.MPTable('setData', total(results))
           });
         }
