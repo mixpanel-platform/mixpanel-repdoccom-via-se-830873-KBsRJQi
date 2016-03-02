@@ -46,14 +46,13 @@
         _.each(data, function(v,k){
             rows.push({
               'Key': k,
-              'Percent': v.Percent,
-              'Total': v.Total,
+              'Percent': v.percent,
+              'Total': v.total,
             })
         })  
         
-        var table = $('#table').DataTable();
+        var table = $('#tableTotal').DataTable();
         table.rows.add(rows).columns.adjust().draw();
-        
       }
       
       $('#tableTotal').DataTable({
