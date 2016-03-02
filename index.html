@@ -40,9 +40,10 @@
         var resultsObj = {}
         var valSum
         _.each(data.values(), function(v, k, l){
-          
+          debugger
           _.each(v, function(num, date, obj){
             valSum += num
+            
           })
           sum += valSum
           resultsObj[k] = {total: valSum, percent:0}
