@@ -45,9 +45,9 @@
         debugger
         _.each(data, function(v,k){
             rows.push({
-              'Key': key,
-              'Percent': data[key]['Percent'],
-              'Total': data[key]['Total'],
+              'Key': k,
+              'Percent': v.Percent,
+              'Total': v.Total,
             })
         })  
         
@@ -75,13 +75,13 @@
           })
           sum += valSum
           resultsObj[k] = {
-            Total: valSum, 
-            Percent:0
+            total: valSum, 
+            percent:0
           }
           valSum = 0
         })
         _.each(resultsObj, function(v,k){
-          v.Percent = percent(v.Total, sum)
+          v.percent = percent(v.total, sum)
         })
         return resultsObj
       }
