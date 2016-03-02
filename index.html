@@ -33,7 +33,6 @@
     <script>
       var percent = function(numerator, denominator){
         var value = 0
-        debugger
         if (denominator != 0){
           value = numerator / denominator * 100
           value = value.toFixed(2)
@@ -41,7 +40,7 @@
         return value + "%"
       }
       
-      drawTable= function(data){
+      var drawTable = function(data){
         var rows = []
         debugger
         for (key in data) {
@@ -106,8 +105,8 @@
             eventGraph.MPChart('setData', results);
             // eventTable.MPTable('setData', results);
             $('#tableTotal').DataTable();
-            drawTable(results)
-            //totalTable.MPTable('setData', total(results))
+            drawTable(total(results))
+            //totalTable.MPTable('setData', )
           });
         }
       };
