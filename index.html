@@ -20,43 +20,6 @@
       <table id="table" class="display" width="100%"></table>
     </div>
     <script>
-      var createTable = function(obj){
-        debugger
-        $('#table').DataTable({
-          scrollX: true,
-          columns: [
-            { title: "Command", data: "command"},
-            { title: "Browse Blade", data: "browsePercent", width: "5%" },
-            { title: "Top Blade", data: "topBlade"},
-            { title: "Top Blade %", data: "topPercent", width:"5%" },
-            { title: "Other %", data: "otherPercent", width:"5%" },
-            { title: "Total", data: "total", width:"5%" },
-          ]
-        })
-      }
-      
-      
-      var drawTable= function(data){
-        var rows = []
-        for (command in data) {
-          var total = data[command]['Total']
-          var topPercent = percent(data[command]['MaxCount'], total)
-          var browsePercent = percent(data[command]['BrowseBlade'], total)
-          rows.push({
-            'command': command,
-            'browsePercent': browsePercent + "%",
-            'topBlade': data[command]['MaxBlade'],
-            'topPercent': topPercent + "%",
-            'otherPercent': (100 - topPercent - browsePercent) + "%",
-            'total': total,
-          })
-        }
-        
-        var table = $('#table').DataTable();
-        table.rows.add(rows).columns.adjust().draw();
-        
-      }
-      
       var percent = function(numerator, denominator){
         var value = 0
         if (denominator != 0){
@@ -84,7 +47,6 @@
             debugger
             eventGraph.MPChart('setData', results);
             eventTable.MPTable('setData', results);
-            createTable(results)
           });
         }
       };
