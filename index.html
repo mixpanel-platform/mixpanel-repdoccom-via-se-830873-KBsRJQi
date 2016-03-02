@@ -50,6 +50,10 @@
           valSum = 0
         })
         debugger
+        _.each(resultsObj, function(v,k){
+          v.percent = v.total / sum
+        })
+        return MP.Data.inst(resultsObj)
       }
       
       var eventSelect = $('#eventSelect').MPEventSelect();
@@ -69,9 +73,9 @@
         // fix x scroll on the table
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
-            total(results)
             eventGraph.MPChart('setData', results);
             eventTable.MPTable('setData', results);
+            totalTable.MPTable('setData', total(results))
           });
         }
       };
