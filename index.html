@@ -39,6 +39,31 @@
         }
         return value + "%"
       }
+      
+      drawTable= function(data){
+        var rows = []
+        debugger
+        for (key in data) {
+          var browsePercent = percent(data[key]['BrowseBlade'], total)
+          rows.push({
+            'Key': key,
+            'Percent': data[key]['Percent'],
+            'Total': data[key]['Total'],
+          })
+        }
+        
+        var table = $('#table').DataTable();
+        table.rows.add(rows).columns.adjust().draw();
+        
+      }
+      
+      $('#table').DataTable({
+        scrollX: true,
+        columns: [
+          { title: "Percent", data: "Percent"},
+          { title: "Total", data: "Total"},
+        ]
+      })
 
       var total = function(data){
         var sum = 0
@@ -79,7 +104,9 @@
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             eventGraph.MPChart('setData', results);
             // eventTable.MPTable('setData', results);
-            totalTable.MPTable('setData', total(results))
+            $('#tableTotal').DataTable();
+            drawTable(results)
+            //totalTable.MPTable('setData', total(results))
           });
         }
       };
