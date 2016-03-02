@@ -61,7 +61,9 @@
       var dateSelect  = $('#dateSelect').MPDatepicker();
       var eventGraph  = $('#graph').MPChart({chartType: 'line'});
       var totalTable = $('#tableTotal').MPTable();
-      var eventTable  = $('#tableTime').MPTable();
+      var eventTable  = $('#tableTime').MPTable({
+        showPercentages : true
+      });
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
