@@ -43,14 +43,13 @@
       var drawTable = function(data){
         var rows = []
         debugger
-        for (key in data) {
-          var browsePercent = percent(data[key]['BrowseBlade'], total)
-          rows.push({
-            'Key': key,
-            'Percent': data[key]['Percent'],
-            'Total': data[key]['Total'],
-          })
-        }
+        _.each(data, function(v,k){
+            rows.push({
+              'Key': key,
+              'Percent': data[key]['Percent'],
+              'Total': data[key]['Total'],
+            })
+        })  
         
         var table = $('#table').DataTable();
         table.rows.add(rows).columns.adjust().draw();
