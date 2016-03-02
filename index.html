@@ -5,11 +5,99 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
   </head>
   <body class="mixpanel-platform-body">
-    <h1>Hello, World!</h1>
+    <div class="mixpanel-platform-section">
+      <div id="eventSelect" style="float: left;"></div>
+      <div id="by" class="mixpanel-platform-label" style="margin-left: 10px; display: none;">by</div>
+      <div id="propSelect" style="float: left;"></div>
+      <div id="dateSelect" style="float: right;"></div>
+      <div style="clear: both;"></div>
+      <div id="graph"></div>
+    </div>
+    <div id="table-container" >
+      <table id="table" class="display" width="100%"></table>
+    </div>
     <script>
-      // Run queries and display results here
+    
+   
+    <script>
+      var createTable = function(obj){
+        debugger
+        $('#table').DataTable({
+          scrollX: true,
+          columns: [
+            { title: "Command", data: "command"},
+            { title: "Browse Blade", data: "browsePercent", width: "5%" },
+            { title: "Top Blade", data: "topBlade"},
+            { title: "Top Blade %", data: "topPercent", width:"5%" },
+            { title: "Other %", data: "otherPercent", width:"5%" },
+            { title: "Total", data: "total", width:"5%" },
+          ]
+        })
+      }
+      
+      
+      var drawTable= function(data){
+        var rows = []
+        for (command in data) {
+          var total = data[command]['Total']
+          var topPercent = percent(data[command]['MaxCount'], total)
+          var browsePercent = percent(data[command]['BrowseBlade'], total)
+          rows.push({
+            'command': command,
+            'browsePercent': browsePercent + "%",
+            'topBlade': data[command]['MaxBlade'],
+            'topPercent': topPercent + "%",
+            'otherPercent': (100 - topPercent - browsePercent) + "%",
+            'total': total,
+          })
+        }
+        
+        var table = $('#table').DataTable();
+        table.rows.add(rows).columns.adjust().draw();
+        
+      }
+      
+      var percent = function(numerator, denominator){
+        var value = 0
+        if (denominator != 0){
+          value = Math.floor( numerator / denominator * 100)
+        }
+        return value
+      }
+      
+      var eventSelect = $('#eventSelect').MPEventSelect();
+      var propSelect  = $('#propSelect').MPPropertySelect();
+      var dateSelect  = $('#dateSelect').MPDatepicker();
+      var eventGraph  = $('#graph').MPChart({chartType: 'line'});
+      var eventTable  = $('#table').MPTable({
+        showPercentages: true,
+        firstColHeader: 'Event'
+      });
+
+      var runQuery = function() {
+        var eventName = eventSelect.MPEventSelect('value'),
+            propName  = propSelect.MPPropertySelect('value'),
+            dateRange = dateSelect.MPDatepicker('value');
+
+        if (eventName) {
+          MP.api.segment(eventName, propName, dateRange).done(function(results) {
+            debugger
+            eventGraph.MPChart('setData', results);
+            eventTable.MPTable('setData', results);
+            createTable(results)
+          });
+        }
+      };
+      eventSelect.on('change', function(e, eventName) {
+        propSelect.MPPropertySelect('setEvent', eventName);
+        $("#by").show();
+        runQuery();
+      });
+      propSelect.on('change', runQuery);
+      dateSelect.on('change', runQuery);
     </script>
   </body>
 </html>
