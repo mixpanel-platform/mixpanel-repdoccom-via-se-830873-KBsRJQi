@@ -58,7 +58,7 @@
           valSum = 0
         })
         _.each(resultsObj, function(v,k){
-          v.Percent = percent(v.total, sum)
+          v.Percent = percent(v.Total, sum)
         })
         return MP.Data.inst(resultsObj)
       }
