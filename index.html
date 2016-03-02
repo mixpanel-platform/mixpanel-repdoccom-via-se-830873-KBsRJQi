@@ -70,10 +70,6 @@
         var eventName = eventSelect.MPEventSelect('value'),
             propName  = propSelect.MPPropertySelect('value'),
             dateRange = dateSelect.MPDatepicker('value');
-        // add two columns
-        // total for the time frame
-        // percent of total for the time frame.
-        // fix x scroll on the table
         if (eventName) {
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             eventGraph.MPChart('setData', results);
