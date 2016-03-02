@@ -36,6 +36,18 @@
       }
 
       var total = function(data){
+        var sum = 0
+        var resultsObj = {}
+        var valSum
+        _.each(data, function(v, k, l){
+          
+          _.each(v, function(num, date, obj){
+            valSum += num
+          })
+          sum += valSum
+          resultsObj[k] = {total: valSum, percent:0}
+          valSum = 0
+        })
         debugger
       }
       
