@@ -51,7 +51,7 @@
         })  
         
         var table = $('#tableTotal').DataTable();
-        table.rows.add(rows).columns.adjust().draw();
+        table.clear().rows.add(rows).columns.adjust().draw();
       }
       
       $('#tableTotal').DataTable({
