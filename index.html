@@ -42,7 +42,6 @@
         var resultsObj = {}
         var valSum = 0
         _.each(data.values(), function(v, k, l){
-          debugger
           _.each(v, function(num, date, obj){
             valSum += num
             
@@ -51,9 +50,8 @@
           resultsObj[k] = {total: valSum, percent:0}
           valSum = 0
         })
-        debugger
         _.each(resultsObj, function(v,k){
-          v.percent = v.total / sum
+          v.percent = percent(v.total, sum)
         })
         return MP.Data.inst(resultsObj)
       }
