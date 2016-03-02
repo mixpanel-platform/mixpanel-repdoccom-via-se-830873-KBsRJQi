@@ -84,7 +84,7 @@
         _.each(resultsObj, function(v,k){
           v.Percent = percent(v.Total, sum)
         })
-        return MP.Data.inst(resultsObj)
+        return resultsObj
       }
       
       var eventSelect = $('#eventSelect').MPEventSelect();
