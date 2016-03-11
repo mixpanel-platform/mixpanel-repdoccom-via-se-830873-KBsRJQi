@@ -38,16 +38,14 @@
       var drawTable = function(data){
         
         var rows = []
-        var numValues = 0
-        var numEvents = 0
         _.each(data, function(v,k){
             rows.push({
               'Key': k,
               'Percent': v.percent,
               'Total': v.total,
+              'Events': v.events,
+              'Values': v.values
             })
-            numValues += 1
-            numEvents += v.total
         })  
         debugger
         var table = $('#tableTotal').DataTable();
@@ -63,17 +61,20 @@
           { title: "Key", data: "Key"},
           { title: "Percent", data: "Percent"},
           { title: "Total", data: "Total"},
+          { title: "Events", data: "Events"},
+          { title: "Values", data: "Values"},
         ]
       })
 
       var total = function(data){
+        debugger
         var sum = 0
         var resultsObj = {}
         var valSum = 0
+        var values = 0
         _.each(data.values(), function(v, k, l){
           _.each(v, function(num, date, obj){
             valSum += num
-            
           })
           sum += valSum
           resultsObj[k] = {
@@ -84,7 +85,9 @@
         })
         _.each(resultsObj, function(v,k){
           v.percent = percent(v.total, sum)
+          v.events = sum
         })
+        
         return resultsObj
       }
       
