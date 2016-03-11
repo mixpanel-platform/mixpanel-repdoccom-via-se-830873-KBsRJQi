@@ -36,6 +36,7 @@
       }
       
       var drawTable = function(data){
+        debugger
         var rows = []
         _.each(data, function(v,k){
             rows.push({
@@ -101,8 +102,12 @@
             propName  = propSelect.MPPropertySelect('value'),
             dateRange = dateSelect.MPDatepicker('value');
         if (eventName) {
-          debugger
-          MP.api.segment(eventName, propName, dateRange).done(function(results) {
+          params = {
+            to: dateRange.to,
+            from: dateRange.from,
+            limit: 10000,
+          }
+          MP.api.segment(eventName, propName, params).done(function(results) {
             eventGraph.MPChart('setData', results);
             // eventTable.MPTable('setData', results);
             $('#tableTotal').DataTable();
