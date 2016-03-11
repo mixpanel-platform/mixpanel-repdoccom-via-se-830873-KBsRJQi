@@ -36,18 +36,20 @@
       }
       
       var drawTable = function(data){
-        debugger
+        
         var rows = []
+        var numValues = 0
+        var numEvents = 0
         _.each(data, function(v,k){
             rows.push({
               'Key': k,
               'Percent': v.percent,
               'Total': v.total,
-              'Total Values': v.values,
-              'Total Events': v.event
             })
+            numValues += 1
+            numEvents += v.total
         })  
-        
+        debugger
         var table = $('#tableTotal').DataTable();
         table.clear().rows.add(rows).columns.adjust().draw();
       }
@@ -61,8 +63,6 @@
           { title: "Key", data: "Key"},
           { title: "Percent", data: "Percent"},
           { title: "Total", data: "Total"},
-          { title: "Total Values", data: "Total Values"},
-          { title: "Total Events", data: "Total Events"},
         ]
       })
 
