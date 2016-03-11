@@ -56,14 +56,10 @@
       
       $('#tableTotal').DataTable({
         scrollX: true,
+        dom: 'Bfrtip',
         buttons: [
-          {
-            extend: 'csvHtml5',
-            className: 'btn btn-xs btn-primary p-5 m-0 width-35 assets-export-btn export-csv',
-            title: new Date(),
-            extension: '.csv'
-          },
-        ],
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
         scrollY: "200px",
         scrollCollapse: true,
         paging: false,
