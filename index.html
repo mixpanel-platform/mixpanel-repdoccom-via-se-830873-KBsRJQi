@@ -82,10 +82,12 @@
             percent:0
           }
           valSum = 0
+          values += 1
         })
         _.each(resultsObj, function(v,k){
           v.percent = percent(v.total, sum)
           v.events = sum
+          v.values = values
         })
         
         return resultsObj
