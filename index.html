@@ -109,9 +109,6 @@
       var eventGraph  = $('#graph').MPChart({chartType: 'line'});
       var totalTable = $('#tableTotal').MPTable();
       var data
-      // var eventTable  = $('#tableTime').MPTable({
-      //   showPercentages : true
-      // });
 
       var runQuery = function() {
         var eventName = eventSelect.MPEventSelect('value'),
@@ -125,11 +122,9 @@
           }
           MP.api.segment(eventName, propName, params).done(function(results) {
             eventGraph.MPChart('setData', results);
-            // eventTable.MPTable('setData', results);
             $('#tableTotal').DataTable();
             data = total(results)
             drawTable(data)
-            //totalTable.MPTable('setData', )
           });
         }
       };
