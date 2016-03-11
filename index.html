@@ -57,7 +57,10 @@
       $('#tableTotal').DataTable({
         dom: 'Bfrtip',
         buttons: [
-          'csv'
+          {
+            extends: 'csv',
+            filename: new Date()
+          }
         ],
         scrollX: true,
         scrollY: "200px",
