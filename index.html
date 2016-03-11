@@ -42,6 +42,8 @@
               'Key': k,
               'Percent': v.percent,
               'Total': v.total,
+              'Total Values': v.values,
+              'Total Events': v.event
             })
         })  
         
@@ -58,6 +60,8 @@
           { title: "Key", data: "Key"},
           { title: "Percent", data: "Percent"},
           { title: "Total", data: "Total"},
+          { title: "Total Values", data: "Total Values"},
+          { title: "Total Events", data: "Total Events"},
         ]
       })
 
@@ -97,6 +101,7 @@
             propName  = propSelect.MPPropertySelect('value'),
             dateRange = dateSelect.MPDatepicker('value');
         if (eventName) {
+          debugger
           MP.api.segment(eventName, propName, dateRange).done(function(results) {
             eventGraph.MPChart('setData', results);
             // eventTable.MPTable('setData', results);
