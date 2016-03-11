@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
@@ -49,13 +50,15 @@
               'Values': v.values
             })
         })  
-        debugger
         var table = $('#tableTotal').DataTable();
         table.clear().rows.add(rows).columns.adjust().draw();
       }
       
       $('#tableTotal').DataTable({
         scrollX: true,
+        buttons: [
+            'csvHtml5',
+        ],
         scrollY: "200px",
         scrollCollapse: true,
         paging: false,
@@ -66,16 +69,10 @@
           { title: "Events", data: "Events"},
           { title: "Values", data: "Values"},
         ],
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
+
       })
 
       var total = function(data){
-        debugger
         var sum = 0
         var resultsObj = {}
         var valSum = 0
