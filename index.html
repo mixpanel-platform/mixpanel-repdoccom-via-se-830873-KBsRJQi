@@ -13,7 +13,6 @@
   </head>
   <body class="mixpanel-platform-body">
     <div class="mixpanel-platform-section">
-      <input type="button" name="submitButton" id="submitButton" onclick="export()" value="Export Top Events" >
       <div id="eventSelect" style="float: left;"></div>
       <div id="by" class="mixpanel-platform-label" style="margin-left: 10px; display: none;">by</div>
       <div id="propSelect" style="float: left;"></div>
@@ -67,7 +66,10 @@
           { title: "Values", data: "Values"},
         ],
         buttons: [
-          'csv'
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
         ]
       })
 
